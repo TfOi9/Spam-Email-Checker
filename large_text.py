@@ -1,12 +1,18 @@
 import gradio as gr
+import utils
 
-def is_rubbish(text):
-    return True
+def check(text):
+    predictor = utils.SpamPredictor()
+    result = predictor.predict(text)
+    print(result['prediction'])
+    if 'spam_probability' in result:
+        print(f"垃圾邮件概率: {result['spam_probability']:.2%}")
+    return result['prediction'] != "正常邮件"
 
 def process_large_text(text):
     word_count = len(text.split())
     char_count = len(text)
-    rubbish = is_rubbish(text)
+    rubbish = check(text)
     if rubbish:
         color = "#ffdce0"
         status = "垃圾内容"
@@ -42,4 +48,4 @@ with gr.Blocks() as demo:
         outputs = output
     )
 
-demo.launch(share = True)
+demo.launch()
