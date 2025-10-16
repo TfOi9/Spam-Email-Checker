@@ -1,6 +1,11 @@
 import tkinter as tk
 import utils
-from tkinter import ttk, messagebox
+import re
+from translate import Translator
+
+def has_chinese(text):
+    pattern = re.compile(r'[\u4e00-\u9fff]')
+    return bool(pattern.search(text))
 
 class Interface:
     def __init__(self, root):
@@ -43,6 +48,10 @@ class Interface:
     def on_button_click(self):
         predictor = utils.SpamPredictor()
         text = self.text_box.get("1.0", tk.END)
+        if has_chinese(text):
+            tr = Translator(from_lang="zh", to_lang="en")
+            text = tr.translate(text)
+            print(text)
         result = predictor.predict(text)
         self.output.config(state="normal")
         self.output.delete("1.0", tk.END)
