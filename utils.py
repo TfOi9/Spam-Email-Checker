@@ -75,7 +75,7 @@ class SpamPredictor:
         # 加载模型和向量器
         self.model = joblib.load(model_path)
         self.vectorizer = joblib.load(vectorizer_path)
-        print("✅ 模型加载成功！")
+        print("模型加载成功！")
     
     def preprocess_email(self, email_text):
         """
@@ -160,10 +160,10 @@ def main():
             
         result = predictor.predict(email_text)
         
-        print(f"\n📧 分类结果: {result['prediction']}")
-        print(f"📊 置信度: {result['confidence']:.2%}")
+        print(f"\n分类结果: {result['prediction']}")
+        print(f"置信度: {result['confidence']:.2%}")
         if 'spam_probability' in result:
-            print(f"🎯 垃圾邮件概率: {result['spam_probability']:.2%}")
+            print(f"垃圾邮件概率: {result['spam_probability']:.2%}")
 
 if __name__ == "__main__":
     main()
