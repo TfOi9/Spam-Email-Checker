@@ -1,7 +1,8 @@
 import utils
 import os
 import re
-from translate import Translator
+import chinese_washer as cw
+import interface
 
 def has_chinese(text):
     pattern = re.compile(r'[\u4e00-\u9fff]')
@@ -9,12 +10,13 @@ def has_chinese(text):
 
 def check(text, predictor):
     if has_chinese(text):
-        tr = Translator(from_lang="zh", to_lang="en")
-        text = tr.translate(text)
+        #print(cw.powerful_wash(text))
+        text = interface.split_and_translate(cw.powerful_wash(text))
+        #print(text)
     result = predictor.predict(text)
     return result
 
-def check_spam(predictor, spam_dir="./data/test/ham"):
+def check_spam(predictor, spam_dir="./data/test/spam"):
     lst = os.listdir(spam_dir)
     cnt = 0
     bad = 0
