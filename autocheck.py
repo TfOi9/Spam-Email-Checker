@@ -16,13 +16,13 @@ def check(text, predictor):
     result = predictor.predict(text)
     return result
 
-def check_spam(predictor, spam_dir="./data/test/spam"):
+def check_spam(predictor, spam_dir="./data/english/hard_ham"):
     lst = os.listdir(spam_dir)
     cnt = 0
     bad = 0
     for item in lst:
         pth = os.path.join(spam_dir, item)
-        with open(pth, "r", encoding="gb2312") as file:
+        with open(pth, "r", encoding="latin-1") as file:
             text = file.read()
             result = check(text, predictor)
             if result['prediction'] == '正常邮件':
