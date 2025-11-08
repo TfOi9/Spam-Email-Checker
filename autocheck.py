@@ -16,7 +16,7 @@ def check(text, predictor):
     result = predictor.predict(text)
     return result
 
-def check_spam(predictor, spam_dir="./data/english/failed_spam"):
+def check_spam(predictor, spam_dir="./data/english/low_reinforced_spam"):
     lst = os.listdir(spam_dir)
     cnt = 0
     bad = 0
