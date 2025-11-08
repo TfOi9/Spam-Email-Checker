@@ -111,8 +111,8 @@ def extract_enhanced_adversarial_features(emails):
     return np.array(features)
 
 class SpamPredictor:
-    def __init__(self, model_path='spam_model.joblib',
-                 vectorizer_path='vectorizer.joblib',
+    def __init__(self, model_path='spam_model_improved.joblib', 
+                 vectorizer_path='vectorizer_improved.joblib',
                  threshold_path='optimal_threshold.joblib'):
         """
         初始化改进的垃圾邮件预测器
